@@ -1,2 +1,10 @@
-package com.example.spacecatsmarket.dto;public class CategoryDTO {
+package com.example.spacecatsmarket.dto;
+
+import lombok.Data;
+
+@Data
+public class CategoryDTO {
+    private Long id;
+    private String name;
+    private String description;
 }
