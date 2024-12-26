@@ -18,4 +18,7 @@ public class ProductDTO {
     private Double price;
 
     private String description;
+
+    @NotNull(message = "Field 'categoryId' is required.")
+    private Long categoryId;
 }
