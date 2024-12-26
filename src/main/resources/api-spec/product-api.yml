@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  title: Product API
+  description: API контракт для CRUD операцій над сутністю Product.
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      summary: Отримати список продуктів
+      responses:
+        '200':
+          description: Успішно отримано список продуктів
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Додати новий продукт
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Продукт успішно створено
+  /products/{id}:
+    get:
+      summary: Отримати продукт за ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Ідентифікатор продукту
+      responses:
+        '200':
+          description: Продукт знайдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Продукт не знайдено
+    put:
+      summary: Оновити продукт за ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Ідентифікатор продукту
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Продукт успішно оновлено
+    delete:
+      summary: Видалити продукт за ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Ідентифікатор продукту
+      responses:
+        '204':
+          description: Продукт успішно видалено
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Унікальний ідентифікатор продукту
+        name:
+          type: string
+          description: Назва продукту
+          example: Космо-корм для котів
+        price:
+          type: number
+          format: float
+          description: Ціна продукту
+          example: 19.99
+        description:
+          type: string
+          description: Опис продукту
