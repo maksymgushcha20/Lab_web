@@ -1,6 +1,22 @@
 spring:
+  profiles:
+    active: local
   application:
     name: space-cats-market
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydb
+    username: root
+    password: root
+    hikari:
+      auto-commit: false
+      connection-timeout: 30000
+      maximum-pool-size: 10
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: none
+    liquibase:
+      change-log: classpath:db/changelog/db.changelog-master.yaml
 
 application:
   greetings:
@@ -10,3 +26,8 @@ application:
   payment-service:
     base-path: http://localhost:8089
     payments: ${application.payment-service.base-path}/payment-service/v1/payments
+  feature:
+    toggles:
+      customer-greeting: true
+      cosmoCats: true
+      kittyProducts: false
