@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2-add-unique-constraint-email
+      author: Maksym
+      changes:
+        - addUniqueConstraint:
+            tableName: users
+            columnNames: email
+            constraintName: unique_user_email
+
+  - changeSet:
+      id: 3-add-index-to-product-name
+      author: Maksym
+      changes:
+        - createIndex:
+            tableName: products
+            indexName: idx_product_name
+            columns:
+              - column:
+                  name: product_name
